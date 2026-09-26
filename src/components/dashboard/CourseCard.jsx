@@ -18,10 +18,10 @@ export default function CourseCard({ course, showProgress = true }) {
             <CardTitle className="mt-2">{course.title}</CardTitle>
           </div>
         </div>
-        <p className="text-sm text-gray-500">{course.instructor}</p>
+        <p className="text-sm text-ink/60">{course.instructor}</p>
       </CardHeader>
       <CardContent className="space-y-3">
-        <div className="flex items-center gap-4 text-sm text-gray-500">
+        <div className="flex items-center gap-4 text-sm text-ink/60">
           <span className="flex items-center gap-1">
             <BookOpen className="h-4 w-4" />
             {course.totalLessons} lessons
@@ -37,11 +37,11 @@ export default function CourseCard({ course, showProgress = true }) {
         {showProgress && (
           <div className="space-y-1.5">
             <div className="flex justify-between text-sm">
-              <span className="text-gray-600">Progress</span>
-              <span className="font-medium text-gray-900">{course.progress}%</span>
+              <span className="text-ink/70">Progress</span>
+              <span className="font-medium text-ink">{course.progress}%</span>
             </div>
             <ProgressBar value={course.progress} />
-            <p className="text-xs text-gray-400">
+            <p className="text-xs text-ink/50">
               {course.completedLessons} of {course.totalLessons} lessons completed
             </p>
           </div>

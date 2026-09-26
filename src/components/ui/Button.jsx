@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom'
 
 const variants = {
-  primary: 'bg-indigo-600 text-white hover:bg-indigo-700 focus-visible:outline-indigo-600',
-  secondary: 'bg-white text-gray-700 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-gray-500',
-  danger: 'bg-red-600 text-white hover:bg-red-700 focus-visible:outline-red-600',
+  primary: 'bg-plum text-white hover:bg-plum focus-visible:outline-plum',
+  secondary: 'bg-white text-ink ring-1 ring-inset ring-mist hover:bg-mist focus-visible:outline-ink',
+  danger: 'bg-tangerine text-white hover:bg-tangerine focus-visible:outline-tangerine',
 }
 
 const sizes = {

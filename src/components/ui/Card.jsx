@@ -1,7 +1,7 @@
 export default function Card({ children, className = '', ...props }) {
   return (
     <div
-      className={`rounded-xl border border-gray-200 bg-white p-6 shadow-sm ${className}`}
+      className={`rounded-xl border border-mist bg-white p-6 shadow-sm ${className}`}
       {...props}
     >
       {children}
@@ -14,9 +14,9 @@ export function CardHeader({ children, className = '' }) {
 }
 
 export function CardTitle({ children, className = '' }) {
-  return <h3 className={`text-lg font-semibold text-gray-900 ${className}`}>{children}</h3>
+  return <h3 className={`text-lg font-semibold text-ink ${className}`}>{children}</h3>
 }
 
 export function CardContent({ children, className = '' }) {
-  return <div className={`text-sm text-gray-600 ${className}`}>{children}</div>
+  return <div className={`text-sm text-ink ${className}`}>{children}</div>
 }

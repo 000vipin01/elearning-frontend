@@ -6,8 +6,8 @@ export default function UpcomingQuizzes() {
   return (
     <section>
       <div className="mb-4 flex items-center gap-2">
-        <FileQuestion className="h-5 w-5 text-indigo-600" />
-        <h2 className="text-lg font-semibold text-gray-900">Upcoming Quizzes</h2>
+        <FileQuestion className="h-5 w-5 text-plum" />
+        <h2 className="text-lg font-semibold text-ink">Upcoming Quizzes</h2>
       </div>
       <div className="space-y-3">
         {upcomingQuizzes.map((quiz) => (
@@ -15,11 +15,11 @@ export default function UpcomingQuizzes() {
             <CardContent className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
               <div className="space-y-1">
                 <div className="flex items-center gap-2">
-                  <p className="text-sm font-medium text-gray-900">{quiz.title}</p>
+                  <p className="text-sm font-medium text-ink">{quiz.title}</p>
                   <Badge variant="warning">{quiz.status}</Badge>
                 </div>
-                <p className="text-xs text-gray-500">{quiz.courseTitle}</p>
-                <div className="flex items-center gap-4 text-xs text-gray-400">
+                <p className="text-xs text-ink/60">{quiz.courseTitle}</p>
+                <div className="flex items-center gap-4 text-xs text-ink/50">
                   <span>Due: {formatDate(quiz.dueDate)}</span>
                   <span className="flex items-center gap-1">
                     <Clock className="h-3 w-3" />

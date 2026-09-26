@@ -5,12 +5,12 @@ export default function WelcomeSection({ userName, streak }) {
   const greeting = getGreeting()
 
   return (
-    <div className="rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 p-6 text-white sm:p-8">
+    <div className="rounded-xl bg-gradient-to-r from-plum to-plum/80 p-6 text-white sm:p-8">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div className="space-y-2">
-          <p className="text-indigo-100">{greeting}</p>
+          <p className="text-white/80">{greeting}</p>
           <h1 className="text-2xl font-bold sm:text-3xl">{userName}</h1>
-          <p className="text-indigo-100">
+          <p className="text-white/80">
             {streak > 0
               ? `You're on a ${streak}-day learning streak! Keep it up.`
               : 'Start a learning streak today!'}

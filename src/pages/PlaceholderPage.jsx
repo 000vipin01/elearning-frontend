@@ -4,8 +4,8 @@ export default function PlaceholderPage({ title, description }) {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">{title}</h1>
-        {description && <p className="mt-1 text-sm text-gray-600">{description}</p>}
+        <h1 className="text-2xl font-bold text-ink">{title}</h1>
+        {description && <p className="mt-1 text-sm text-ink">{description}</p>}
       </div>
 
       <Card>
@@ -13,7 +13,7 @@ export default function PlaceholderPage({ title, description }) {
           <CardTitle>Coming Soon</CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-ink">
             This page is under development. Check back later for updates.
           </p>
         </CardContent>
