@@ -3,6 +3,7 @@ import {
   LayoutDashboard,
   BookOpen,
   Users,
+  Shield,
   X,
 } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext.jsx'
@@ -14,15 +15,27 @@ const studentNav = [
 ]
 
 const instructorNav = [
-  { name: 'Dashboard', href: '/', icon: LayoutDashboard },
+  { name: 'Dashboard', href: '/instructor', icon: LayoutDashboard },
   { name: 'My Courses', href: '/instructor', icon: BookOpen },
+  { name: 'Profile', href: '/profile', icon: Users },
+]
+
+const adminNav = [
+  { name: 'Dashboard', href: '/admin', icon: LayoutDashboard },
+  { name: 'Admin Panel', href: '/admin', icon: Shield },
+  { name: 'Courses', href: '/courses', icon: BookOpen },
   { name: 'Profile', href: '/profile', icon: Users },
 ]
 
 export default function Sidebar({ isOpen, onClose }) {
   const { user } = useAuth()
 
-  const navigation = user?.role === 'INSTRUCTOR' ? instructorNav : studentNav
+  const navigation =
+    user?.role === 'INSTRUCTOR'
+      ? instructorNav
+      : user?.role === 'ADMIN'
+        ? adminNav
+        : studentNav
 
   return (
     <>

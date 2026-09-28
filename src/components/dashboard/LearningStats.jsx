@@ -30,20 +30,20 @@ export default function LearningStats({ dashboard }) {
       </div>
 
       <div className="border-t border-ink/50 px-5 py-4">
-        <p className="mb-3 text-xs text-ink/50">Monthly Overview</p>
-        <div className="flex items-end justify-between gap-3">
-          {[8, 12, 9, 18].map((hours, i) => (
-            <div key={i} className="flex flex-1 flex-col items-center gap-1.5">
-              <span className="text-[10px] font-medium text-ink/60">{hours}h</span>
-              <div className="flex h-16 w-full items-end rounded-t" style={{ backgroundColor: '#4a4b4b' }}>
-                <div
-                  className="w-full rounded-t bg-gradient-to-t from-plum to-plum/70 transition-all duration-500"
-                  style={{ height: `${(hours / 18) * 100}%` }}
-                />
-              </div>
-              <span className="text-[10px] text-ink/60">W{i + 1}</span>
-            </div>
-          ))}
+        <p className="mb-3 text-xs text-ink/50">Course Status</p>
+        <div className="space-y-2">
+          <div className="flex items-center justify-between text-xs">
+            <span className="text-ink/60">Enrolled</span>
+            <span className="font-medium text-ink">{dashboard?.totalEnrolled || 0}</span>
+          </div>
+          <div className="flex items-center justify-between text-xs">
+            <span className="text-ink/60">Completed</span>
+            <span className="font-medium text-fern">{dashboard?.completed || 0}</span>
+          </div>
+          <div className="flex items-center justify-between text-xs">
+            <span className="text-ink/60">In Progress</span>
+            <span className="font-medium text-tangerine">{dashboard?.inProgress || 0}</span>
+          </div>
         </div>
       </div>
     </section>

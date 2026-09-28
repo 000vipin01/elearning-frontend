@@ -115,12 +115,12 @@ export default function CourseDetailPage() {
           <CardContent className="p-4">
             <div className="flex items-center justify-between text-sm">
               <span className="text-ink/70">Progress</span>
-              <span className="font-medium text-ink">{enrollment?.enrollment?.progress || 0}%</span>
+              <span className="font-medium text-ink">{enrollment?.progress || 0}%</span>
             </div>
             <div className="mt-2 h-2 w-full rounded-full bg-mist">
               <div
                 className="h-2 rounded-full bg-plum transition-all duration-500"
-                style={{ width: `${enrollment?.enrollment?.progress || 0}%` }}
+                style={{ width: `${enrollment?.progress || 0}%` }}
               />
             </div>
             <p className="mt-1 text-xs text-ink/50">

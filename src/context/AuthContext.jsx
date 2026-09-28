@@ -5,10 +5,16 @@ const AuthContext = createContext(null)
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(() => {
-    const token = localStorage.getItem('token')
-    const savedUser = localStorage.getItem('user')
-    if (token && savedUser) {
-      return JSON.parse(savedUser)
+    try {
+      const token = localStorage.getItem('token')
+      const savedUser = localStorage.getItem('user')
+      if (token && savedUser) {
+        return JSON.parse(savedUser)
+      }
+    } catch {
+      // Corrupted localStorage — clear it
+      localStorage.removeItem('token')
+      localStorage.removeItem('user')
     }
     return null
   })
@@ -29,10 +35,10 @@ export function AuthProvider({ children }) {
     }
   }, [])
 
-  const signup = useCallback(async (name, email, password) => {
+  const signup = useCallback(async (name, email, password, role) => {
     setIsLoading(true)
     try {
-      const data = await api.signup(name, email, password)
+      const data = await api.signup(name, email, password, role)
       localStorage.setItem('token', data.token)
       localStorage.setItem('user', JSON.stringify(data))
       setUser(data)

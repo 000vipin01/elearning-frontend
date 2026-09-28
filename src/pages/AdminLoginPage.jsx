@@ -1,25 +1,15 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { GraduationCap, Mail, Lock, User, LoaderCircle, AlertCircle } from 'lucide-react'
+import { Shield, Mail, Lock, LoaderCircle, AlertCircle } from 'lucide-react'
 import { Button, Card, CardContent, CardHeader, CardTitle } from '../components/ui/index.js'
 import { useAuth } from '../context/AuthContext.jsx'
 
-function getHomeForRole(role) {
-  switch (role) {
-    case 'ADMIN': return '/'
-    case 'INSTRUCTOR': return '/instructor'
-    default: return '/'
-  }
-}
-
-export default function SignupPage() {
+export default function AdminLoginPage() {
   const navigate = useNavigate()
-  const { signup } = useAuth()
+  const { login } = useAuth()
 
-  const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [role, setRole] = useState('STUDENT')
   const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
 
@@ -28,30 +18,34 @@ export default function SignupPage() {
     setError('')
     setIsLoading(true)
 
-    const result = await signup(name, email, password, role)
+    const result = await login(email, password)
     setIsLoading(false)
 
     if (result.success) {
-      navigate(getHomeForRole(result.user?.role))
+      if (result.user?.role === 'ADMIN') {
+        navigate('/admin')
+      } else {
+        setError('Access denied. Admin credentials required.')
+      }
     } else {
-      setError(result.error || 'Signup failed. Please try again.')
+      setError(result.error || 'Login failed. Please try again.')
     }
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-mist px-4">
+    <div className="flex min-h-screen items-center justify-center bg-ink px-4">
       <div className="w-full max-w-md">
         <div className="mb-8 flex flex-col items-center">
           <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-plum">
-            <GraduationCap className="h-8 w-8 text-white" />
+            <Shield className="h-8 w-8 text-white" />
           </div>
-          <h1 className="mt-4 text-2xl font-bold text-ink">E-Learning</h1>
-          <p className="mt-1 text-sm text-ink">Create your account</p>
+          <h1 className="mt-4 text-2xl font-bold text-white">Admin Portal</h1>
+          <p className="mt-1 text-sm text-white/60">Restricted access only</p>
         </div>
 
         <Card>
           <CardHeader>
-            <CardTitle>Get started</CardTitle>
+            <CardTitle>Admin Sign In</CardTitle>
           </CardHeader>
           <CardContent>
             {error && (
@@ -63,26 +57,8 @@ export default function SignupPage() {
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label htmlFor="name" className="mb-1.5 block text-sm font-medium text-ink">
-                  Full name
-                </label>
-                <div className="relative">
-                  <User className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-ink/50" />
-                  <input
-                    id="name"
-                    type="text"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    placeholder="John Doe"
-                    required
-                    className="w-full rounded-md border border-mist bg-white py-2 pl-10 pr-3 text-sm text-ink placeholder:text-ink/40 focus:border-plum focus:outline-none focus:ring-1 focus:ring-plum"
-                  />
-                </div>
-              </div>
-
-              <div>
                 <label htmlFor="email" className="mb-1.5 block text-sm font-medium text-ink">
-                  Email
+                  Admin Email
                 </label>
                 <div className="relative">
                   <Mail className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-ink/50" />
@@ -91,7 +67,7 @@ export default function SignupPage() {
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="you@example.com"
+                    placeholder="admin@example.com"
                     required
                     className="w-full rounded-md border border-mist bg-white py-2 pl-10 pr-3 text-sm text-ink placeholder:text-ink/40 focus:border-plum focus:outline-none focus:ring-1 focus:ring-plum"
                   />
@@ -109,20 +85,10 @@ export default function SignupPage() {
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Create a password"
+                    placeholder="Enter admin password"
                     required
-                    minLength={6}
                     className="w-full rounded-md border border-mist bg-white py-2 pl-10 pr-3 text-sm text-ink placeholder:text-ink/40 focus:border-plum focus:outline-none focus:ring-1 focus:ring-plum"
                   />
-                </div>
-              </div>
-
-              <div>
-                <label className="mb-1.5 block text-sm font-medium text-ink">
-                  Account Type
-                </label>
-                <div className="rounded-md border border-mist bg-mist/50 px-3 py-2.5 text-sm text-ink/70">
-                  Student (Instructor accounts are created by administrators)
                 </div>
               </div>
 
@@ -130,18 +96,17 @@ export default function SignupPage() {
                 {isLoading ? (
                   <>
                     <LoaderCircle className="h-4 w-4 animate-spin" />
-                    Creating account...
+                    Verifying...
                   </>
                 ) : (
-                  'Create account'
+                  'Sign in as Admin'
                 )}
               </Button>
             </form>
 
             <p className="mt-4 text-center text-sm text-ink">
-              Already have an account?{' '}
               <Link to="/login" className="font-medium text-plum hover:underline">
-                Sign in
+                ← Back to regular login
               </Link>
             </p>
           </CardContent>

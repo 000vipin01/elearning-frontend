@@ -6,8 +6,8 @@ import { useAuth } from '../context/AuthContext.jsx'
 
 function getHomeForRole(role) {
   switch (role) {
-    case 'admin': return '/admin'
-    case 'instructor': return '/instructor'
+    case 'ADMIN': return '/admin'
+    case 'INSTRUCTOR': return '/instructor'
     default: return '/'
   }
 }
@@ -114,6 +114,12 @@ export default function LoginPage() {
                 Sign up
               </Link>
             </p>
+
+            <div className="mt-4 border-t border-mist pt-4 text-center">
+              <Link to="/admin-login" className="text-sm text-ink/50 hover:text-plum">
+                Admin Portal →
+              </Link>
+            </div>
           </CardContent>
         </Card>
 
@@ -125,7 +131,7 @@ export default function LoginPage() {
             <div className="space-y-1 text-xs text-ink/70">
               <p><span className="font-medium text-ink">Student:</span> alex@example.com / password123</p>
               <p><span className="font-medium text-ink">Instructor:</span> sarah@example.com / password123</p>
-              <p><span className="font-medium text-ink">Admin:</span> admin@example.com / admin123</p>
+              <p><span className="font-medium text-ink">Admin:</span> admin@example.com / password123</p>
             </div>
           </CardContent>
         </Card>

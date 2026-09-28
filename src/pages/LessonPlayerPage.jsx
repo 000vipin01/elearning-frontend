@@ -24,7 +24,7 @@ export default function LessonPlayerPage() {
         setCourse(courseData)
         setLessons(lessonsData)
 
-        const lesson = lessonsData.find((l) => l.id === parseInt(lessonId))
+        const lesson = lessonsData.find((l) => l.id === parseInt(lessonId, 10))
         if (lesson) {
           setCurrentLesson(lesson)
         }
@@ -40,7 +40,7 @@ export default function LessonPlayerPage() {
   const handleMarkComplete = async () => {
     try {
       const totalLessons = lessons.length
-      const currentIndex = lessons.findIndex((l) => l.id === parseInt(lessonId))
+      const currentIndex = lessons.findIndex((l) => l.id === parseInt(lessonId, 10))
       const newProgress = Math.round(((currentIndex + 1) / totalLessons) * 100)
       await api.updateProgress(courseId, newProgress)
     } catch (err) {
@@ -132,7 +132,7 @@ export default function LessonPlayerPage() {
                     key={lesson.id}
                     onClick={() => goToLesson(lesson.id)}
                     className={`flex w-full items-center gap-2 rounded-lg p-2 text-left text-sm transition-colors ${
-                      lesson.id === parseInt(lessonId)
+                      lesson.id === parseInt(lessonId, 10)
                         ? 'bg-plum/10 text-plum'
                         : 'text-ink/70 hover:bg-mist'
                     }`}

@@ -24,12 +24,7 @@ export default function EnrolledCourses({ enrollments = [] }) {
         {enrollments.map((enrollment) => (
           <CourseCard
             key={enrollment.id}
-            course={{
-              ...enrollment.course,
-              progress: enrollment.progress,
-              completedLessons: enrollment.completedLessons,
-              totalLessons: enrollment.totalLessons,
-            }}
+            course={enrollment.course}
           />
         ))}
       </div>

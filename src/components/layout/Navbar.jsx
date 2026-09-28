@@ -6,7 +6,7 @@ import { Button } from '../ui/index.js'
 
 function getHomeForRole(role) {
   switch (role) {
-    case 'ADMIN': return '/admin'
+    case 'ADMIN': return '/'
     case 'INSTRUCTOR': return '/instructor'
     default: return '/'
   }
