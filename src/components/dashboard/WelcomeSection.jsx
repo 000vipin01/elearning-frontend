@@ -9,7 +9,7 @@ export default function WelcomeSection({ userName, streak }) {
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div className="space-y-2">
           <p className="text-white/80">{greeting}</p>
-          <h1 className="text-2xl font-bold sm:text-3xl">{userName}</h1>
+          <h1 className="text-2xl font-bold sm:text-3xl">Ailan</h1>
           <p className="text-white/80">
             {streak > 0
               ? `You're on a ${streak}-day learning streak! Keep it up.`

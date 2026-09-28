@@ -1,7 +1,7 @@
 export const currentUser = {
-  name: 'Alex Johnson',
-  email: 'alex.johnson@example.com',
-  role: 'student',
+  name: 'Ailan ',
+  email: 'ailan@example.com',
+  role: 'admin',
   avatar: null,
   memberSince: '2025-09-15',
 }
