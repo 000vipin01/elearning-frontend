@@ -3,10 +3,6 @@ import {
   LayoutDashboard,
   BookOpen,
   Users,
-  Settings,
-  BarChart3,
-  Shield,
-  PlusCircle,
   X,
 } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext.jsx'
@@ -15,36 +11,18 @@ const studentNav = [
   { name: 'Dashboard', href: '/', icon: LayoutDashboard },
   { name: 'Courses', href: '/courses', icon: BookOpen },
   { name: 'Profile', href: '/profile', icon: Users },
-  { name: 'Settings', href: '/settings', icon: Settings },
 ]
 
 const instructorNav = [
   { name: 'Dashboard', href: '/', icon: LayoutDashboard },
   { name: 'My Courses', href: '/instructor', icon: BookOpen },
-  { name: 'Create Course', href: '/instructor?tab=create', icon: PlusCircle },
-  { name: 'Analytics', href: '/analytics', icon: BarChart3 },
   { name: 'Profile', href: '/profile', icon: Users },
-  { name: 'Settings', href: '/settings', icon: Settings },
-]
-
-const adminNav = [
-  { name: 'Dashboard', href: '/', icon: LayoutDashboard },
-  { name: 'Admin Panel', href: '/admin', icon: Shield },
-  { name: 'Courses', href: '/courses', icon: BookOpen },
-  { name: 'Analytics', href: '/analytics', icon: BarChart3 },
-  { name: 'Profile', href: '/profile', icon: Users },
-  { name: 'Settings', href: '/settings', icon: Settings },
 ]
 
 export default function Sidebar({ isOpen, onClose }) {
   const { user } = useAuth()
 
-  const navigation =
-    user?.role === 'admin'
-      ? adminNav
-      : user?.role === 'instructor'
-        ? instructorNav
-        : studentNav
+  const navigation = user?.role === 'INSTRUCTOR' ? instructorNav : studentNav
 
   return (
     <>

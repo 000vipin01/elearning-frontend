@@ -1,7 +1,7 @@
 import { GraduationCap } from 'lucide-react'
 import { Button } from '../ui/index.js'
 
-export default function WelcomeSection({ userName, streak }) {
+export default function WelcomeSection({ userName: _, streak }) {
   const greeting = getGreeting()
 
   return (

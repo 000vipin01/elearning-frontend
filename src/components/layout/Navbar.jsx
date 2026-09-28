@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { Menu, X, GraduationCap, Bell, User, LogOut } from 'lucide-react'
+import { Menu, X, GraduationCap, User, LogOut } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext.jsx'
 import { Button } from '../ui/index.js'
 
 function getHomeForRole(role) {
   switch (role) {
-    case 'admin': return '/admin'
-    case 'instructor': return '/instructor'
+    case 'ADMIN': return '/admin'
+    case 'INSTRUCTOR': return '/instructor'
     default: return '/'
   }
 }
@@ -26,7 +26,6 @@ export default function Navbar({ onMenuToggle, isSidebarOpen }) {
   return (
     <header className="sticky top-0 z-30 border-b border-mist bg-white">
       <div className="flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
-        {/* Left: mobile menu toggle + logo */}
         <div className="flex items-center gap-4">
           <button
             type="button"
@@ -42,62 +41,44 @@ export default function Navbar({ onMenuToggle, isSidebarOpen }) {
           </Link>
         </div>
 
-        {/* Right: actions */}
         <div className="flex items-center gap-2">
           {isAuthenticated ? (
-            <>
+            <div className="relative">
               <button
                 type="button"
-                className="rounded-full p-2 text-ink/60 hover:bg-mist hover:text-ink"
-                aria-label="Notifications"
+                className="flex items-center gap-2 rounded-full p-1.5 hover:bg-mist"
+                onClick={() => setIsProfileOpen(!isProfileOpen)}
               >
-                <Bell className="h-5 w-5" />
+                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-plum/10">
+                  <User className="h-4 w-4 text-plum" />
+                </div>
               </button>
 
-              <div className="relative">
-                <button
-                  type="button"
-                  className="flex items-center gap-2 rounded-full p-1.5 hover:bg-mist"
-                  onClick={() => setIsProfileOpen(!isProfileOpen)}
-                >
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-plum/10">
-                    <User className="h-4 w-4 text-plum" />
+              {isProfileOpen && (
+                <div className="absolute right-0 mt-2 w-48 rounded-lg border border-mist bg-white py-1 shadow-lg">
+                  <div className="border-b border-mist px-4 py-2">
+                    <p className="text-sm font-medium text-ink">{user?.name}</p>
+                    <p className="text-xs text-ink/60">{user?.email}</p>
                   </div>
-                </button>
-
-                {isProfileOpen && (
-                  <div className="absolute right-0 mt-2 w-48 rounded-lg border border-mist bg-white py-1 shadow-lg">
-                    <div className="border-b border-mist px-4 py-2">
-                      <p className="text-sm font-medium text-ink">{user.name}</p>
-                      <p className="text-xs text-ink/60">{user.email}</p>
-                    </div>
-                    <Link
-                      to="/profile"
-                      className="block px-4 py-2 text-sm text-ink hover:bg-cream"
-                      onClick={() => setIsProfileOpen(false)}
-                    >
-                      Profile
-                    </Link>
-                    <Link
-                      to="/settings"
-                      className="block px-4 py-2 text-sm text-ink hover:bg-cream"
-                      onClick={() => setIsProfileOpen(false)}
-                    >
-                      Settings
-                    </Link>
-                    <hr className="my-1" />
-                    <button
-                      type="button"
-                      className="flex w-full items-center gap-2 px-4 py-2 text-left text-sm text-tangerine hover:bg-cream"
-                      onClick={handleLogout}
-                    >
-                      <LogOut className="h-4 w-4" />
-                      Sign out
-                    </button>
-                  </div>
-                )}
-              </div>
-            </>
+                  <Link
+                    to="/profile"
+                    className="block px-4 py-2 text-sm text-ink hover:bg-cream"
+                    onClick={() => setIsProfileOpen(false)}
+                  >
+                    Profile
+                  </Link>
+                  <hr className="my-1" />
+                  <button
+                    type="button"
+                    className="flex w-full items-center gap-2 px-4 py-2 text-left text-sm text-tangerine hover:bg-cream"
+                    onClick={handleLogout}
+                  >
+                    <LogOut className="h-4 w-4" />
+                    Sign out
+                  </button>
+                </div>
+              )}
+            </div>
           ) : (
             <div className="flex items-center gap-2">
               <Button variant="secondary" size="sm" to="/login">

@@ -1,8 +1,19 @@
 import { BookOpen } from 'lucide-react'
 import CourseCard from './CourseCard.jsx'
-import { enrolledCourses } from '../../data/mockData.js'
 
-export default function EnrolledCourses() {
+export default function EnrolledCourses({ enrollments = [] }) {
+  if (enrollments.length === 0) {
+    return (
+      <section>
+        <div className="mb-4 flex items-center gap-2">
+          <BookOpen className="h-5 w-5 text-plum" />
+          <h2 className="text-lg font-semibold text-ink">Enrolled Courses</h2>
+        </div>
+        <p className="text-sm text-ink/60">No enrolled courses yet.</p>
+      </section>
+    )
+  }
+
   return (
     <section>
       <div className="mb-4 flex items-center gap-2">
@@ -10,8 +21,16 @@ export default function EnrolledCourses() {
         <h2 className="text-lg font-semibold text-ink">Enrolled Courses</h2>
       </div>
       <div className="grid gap-4 sm:grid-cols-2">
-        {enrolledCourses.map((course) => (
-          <CourseCard key={course.id} course={course} />
+        {enrollments.map((enrollment) => (
+          <CourseCard
+            key={enrollment.id}
+            course={{
+              ...enrollment.course,
+              progress: enrollment.progress,
+              completedLessons: enrollment.completedLessons,
+              totalLessons: enrollment.totalLessons,
+            }}
+          />
         ))}
       </div>
     </section>
