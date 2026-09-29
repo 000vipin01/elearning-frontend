@@ -1,5 +1,5 @@
-import { createContext, useContext, useState, useCallback } from 'react'
-import { api } from '../services/api.js'
+import { createContext, useContext, useState, useCallback, useEffect } from 'react'
+import { api } from '../api/client.js'
 
 const AuthContext = createContext(null)
 
@@ -12,7 +12,6 @@ export function AuthProvider({ children }) {
         return JSON.parse(savedUser)
       }
     } catch {
-      // Corrupted localStorage — clear it
       localStorage.removeItem('token')
       localStorage.removeItem('user')
     }
@@ -23,7 +22,7 @@ export function AuthProvider({ children }) {
   const login = useCallback(async (email, password) => {
     setIsLoading(true)
     try {
-      const data = await api.login(email, password)
+      const data = await api.post('/auth/login', { email, password })
       localStorage.setItem('token', data.token)
       localStorage.setItem('user', JSON.stringify(data))
       setUser(data)
@@ -35,10 +34,10 @@ export function AuthProvider({ children }) {
     }
   }, [])
 
-  const signup = useCallback(async (name, email, password, role) => {
+  const signup = useCallback(async (name, email, password) => {
     setIsLoading(true)
     try {
-      const data = await api.signup(name, email, password, role)
+      const data = await api.post('/auth/signup', { name, email, password })
       localStorage.setItem('token', data.token)
       localStorage.setItem('user', JSON.stringify(data))
       setUser(data)

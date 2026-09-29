@@ -1,0 +1,122 @@
+@import "tailwindcss";
+
+/* ============================================
+   DESIGN TOKENS — Three distinct role palettes
+   ============================================ */
+
+@theme {
+  /* ---- Student: "Learning Studio" — warm, editorial, content-first ---- */
+  --color-student-bg: #faf8f5;
+  --color-student-surface: #ffffff;
+  --color-student-primary: #c2410c;
+  --color-student-primary-hover: #9a3412;
+  --color-student-secondary: #0d9488;
+  --color-student-accent: #f59e0b;
+  --color-student-text: #1c1917;
+  --color-student-text-muted: #78716c;
+  --color-student-border: #e7e5e4;
+  --color-student-hero: #fff7ed;
+  --font-student-display: "Playfair Display", Georgia, serif;
+  --font-student-body: "Source Sans 3", system-ui, sans-serif;
+
+  /* ---- Instructor: "Creator Workbench" — dense, tool-like, focused ---- */
+  --color-instructor-bg: #f8fafc;
+  --color-instructor-surface: #ffffff;
+  --color-instructor-primary: #1d4ed8;
+  --color-instructor-primary-hover: #1e40af;
+  --color-instructor-secondary: #059669;
+  --color-instructor-accent: #d97706;
+  --color-instructor-text: #0f172a;
+  --color-instructor-text-muted: #64748b;
+  --color-instructor-border: #e2e8f0;
+  --color-instructor-sidebar: #1e293b;
+  --font-instructor-display: "JetBrains Mono", monospace;
+  --font-instructor-body: "Inter", system-ui, sans-serif;
+
+  /* ---- Admin: "Control Room" — data-dense, operations, high-contrast ---- */
+  --color-admin-bg: #f1f5f9;
+  --color-admin-surface: #ffffff;
+  --color-admin-primary: #7c3aed;
+  --color-admin-primary-hover: #6d28d9;
+  --color-admin-secondary: #0891b2;
+  --color-admin-accent: #e11d48;
+  --color-admin-text: #0f172a;
+  --color-admin-text-muted: #475569;
+  --color-admin-border: #cbd5e1;
+  --color-admin-sidebar: #0f172a;
+  --font-admin-display: "Space Grotesk", system-ui, sans-serif;
+  --font-admin-body: "IBM Plex Sans", system-ui, sans-serif;
+}
+
+/* ---- Base styles ---- */
+body {
+  font-family: var(--font-student-body);
+  background: var(--color-student-bg);
+  color: var(--color-student-text);
+}
+
+/* ---- Student shell ---- */
+.shell-student {
+  --bg: var(--color-student-bg);
+  --surface: var(--color-student-surface);
+  --primary: var(--color-student-primary);
+  --primary-hover: var(--color-student-primary-hover);
+  --secondary: var(--color-student-secondary);
+  --accent: var(--color-student-accent);
+  --text: var(--color-student-text);
+  --text-muted: var(--color-student-text-muted);
+  --border: var(--color-student-border);
+  --hero: var(--color-student-hero);
+  --font-display: var(--font-student-display);
+  --font-body: var(--font-student-body);
+}
+
+/* ---- Instructor shell ---- */
+.shell-instructor {
+  --bg: var(--color-instructor-bg);
+  --surface: var(--color-instructor-surface);
+  --primary: var(--color-instructor-primary);
+  --primary-hover: var(--color-instructor-primary-hover);
+  --secondary: var(--color-instructor-secondary);
+  --accent: var(--color-instructor-accent);
+  --text: var(--color-instructor-text);
+  --text-muted: var(--color-instructor-text-muted);
+  --border: var(--color-instructor-border);
+  --sidebar: var(--color-instructor-sidebar);
+  --font-display: var(--font-instructor-display);
+  --font-body: var(--font-instructor-body);
+}
+
+/* ---- Admin shell ---- */
+.shell-admin {
+  --bg: var(--color-admin-bg);
+  --surface: var(--color-admin-surface);
+  --primary: var(--color-admin-primary);
+  --primary-hover: var(--color-admin-primary-hover);
+  --secondary: var(--color-admin-secondary);
+  --accent: var(--color-admin-accent);
+  --text: var(--color-admin-text);
+  --text-muted: var(--color-admin-text-muted);
+  --border: var(--color-admin-border);
+  --sidebar: var(--color-admin-sidebar);
+  --font-display: var(--font-admin-display);
+  --font-body: var(--font-admin-body);
+}
+
+/* ---- Shared utilities ---- */
+.font-display { font-family: var(--font-display); }
+.font-body { font-family: var(--font-body); }
+
+/* ---- Focus states ---- */
+*:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* ---- Reduced motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

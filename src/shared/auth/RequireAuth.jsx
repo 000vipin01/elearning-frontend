@@ -1,7 +1,7 @@
 import { Navigate, Outlet, useLocation } from 'react-router-dom'
-import { useAuth } from '../context/AuthContext.jsx'
+import { useAuth } from './AuthContext.jsx'
 
-export default function ProtectedRoute({ allowedRoles }) {
+export default function RequireAuth({ allowedRoles }) {
   const { isAuthenticated, user } = useAuth()
   const location = useLocation()
 
@@ -10,7 +10,7 @@ export default function ProtectedRoute({ allowedRoles }) {
   }
 
   if (allowedRoles && !allowedRoles.includes(user.role)) {
-    return <Navigate to="/" replace />
+    return <Navigate to={`/${user.role.toLowerCase()}`} replace />
   }
 
   return <Outlet />
